@@ -1,0 +1,24 @@
+{
+    "name": "MVC Test",
+    "description": "MVC Test Framework",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.6",
+        "twig/twig": "^1.24"
+    },
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Serge Shemshuchenko",
+            "email": "s.shemshuchenko@gmail.com"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "app/core/",
+            "app/controllers/",
+            "app/helpers/",
+            "app/views/"
+        ]
+    }
+}

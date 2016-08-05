@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3 style="margin-bottom: 30px">Регистрация > Шаг 2</h3>
+            <div class="form-group">
+                <form action="" method="post">
+                    <label for="country">Страна</label>
+                    <input type="text" id="country" name="country" value="{{ register.country }}" class="form-control" required>
+                    <label for="city">Город</label>
+                    <input type="text" id="city" name="city" value="{{ register.city }}" class="form-control" required>
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" name="phone" value="{{ register.phone }}" class="form-control" placeholder="+12345678987" required>
+                    <ul class="pager">
+                        <li class="previous"><button type="button" class="btn btn-primary" onclick="window.location.href='/register/step1'; return false;"><span>&larr;</span> Назад</button></li>
+                        <li class="next"><button type="submit" class="btn btn-primary">Далее <span>&rarr;</span></button></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

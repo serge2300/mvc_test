@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3 style="margin-bottom: 30px">Профиль пользователя</h3>
+                </div>
+                <div class="col-md-4">
+                    <span class="pull-right">
+                        <a href="/user/logout" class="label label-default">Выйти</a>
+                    </span>
+                </div>
+            </div>
+            <a href="/avatars/{{ user.avatar }}" target="_blank"><img src="/avatars/{{ user.avatar }}" style="height: 100px; margin-bottom: 30px"></a>
+            <table class="table table-striped table-hover">
+                <tr>
+                    <td>Логин:</td>
+                    <td><b>{{ user.login }}</b></td>
+                </tr>
+                <tr>
+                    <td>E-mail:</td>
+                    <td><b>{{ user.email }}</b></td>
+                </tr>
+                <tr>
+                    <td>ФИО:</td>
+                    <td><b>{{ user.name }}</b></td>
+                </tr>
+                <tr>
+                    <td>Страна:</td>
+                    <td><b>{{ user.country }}</b></td>
+                </tr>
+                <tr>
+                    <td>Город:</td>
+                    <td><b>{{ user.city }}</b></td>
+                </tr>
+                <tr>
+                    <td>Телефон:</td>
+                    <td><b>{{ user.phone }}</b>
+                        {% if user.verified == 1 %}
+                            <span class="label label-success pull-right">Подтвержден</span>
+                        {% else %}
+                            <span class="pull-right"><a href="#" data-toggle="modal" data-target="#verifyPhoneModal">Подтвердить</a></span>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="verifyPhoneModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" title="Закрыть окно">&times;</button>
+                <h4 class="modal-title text-center">Подтвердить номер телефона</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <form action="/user/verifyphone" method="post">
+                        <div id="verifyPhone1">
+                            На этот номер будет отправлено СМС с кодом:
+                            <input type="text" value="{{ user.phone }}" class="form-control" disabled>
+                            <button id="verifyPhoneSend" type="button" class="btn btn-primary">Отправить</button>
+                        </div>
+                        <div id="verifyPhone2">
+                            Введите код из СМС:
+                            <input type="text" id="code" name="code" class="form-control" required>
+                            <button id="verifyPhoneSend" type="submit" class="btn btn-primary">Подтвердить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#verifyPhoneSend').click(function (e) {
+            e.preventDefault();
+            $.get("/user/verifyphone/send", null, function (response) {
+                if (response == true)
+                    $('#verifyPhoneSend').prop('disabled', true).text('Отправлено');
+                else
+                    alert('Произошла ошибка!');
+            });
+        });
+    });
+</script>

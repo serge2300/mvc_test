@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3 style="margin-bottom: 30px">Регистрация > Шаг 3</h3>
+            <div class="form-group">
+                <form action="" method="post" enctype="multipart/form-data">
+                    <label for="avatar">Аватар</label>
+                    <input type="file" class="form-control" name="avatar" id="avatar" style="display: none">
+                    <input type="text" class="form-control" name="fakeinput" id="fakeinput" >
+                    <div class="g-recaptcha" data-sitekey="6Len8B0TAAAAAC2fohUhUUvhjnNuqK4xuFyp_9cI"></div>
+                    <ul class="pager">
+                        <li class="previous"><button type="button" class="btn btn-primary" onclick="window.location.href='/register/step2'; return false;"><span>&larr;</span> Назад</button></li>
+                        <li class="next"><button type="submit" class="btn btn-primary">Завершить</button></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Fake input
+        $('#fakeinput').on('click', function(){
+            $('#avatar').trigger('click');
+        });
+        $('#avatar').change(function(){
+            var value = $('#avatar').val();
+            $('#fakeinput').val(value).attr('placeholder', value);
+        });
+    });
+</script>
